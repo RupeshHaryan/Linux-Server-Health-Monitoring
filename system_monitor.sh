@@ -70,3 +70,15 @@ if [ "$SWAP_USAGE" -ge 50 ]; then
 else
     echo "OK: Swap usage is ${SWAP_USAGE}%" >> "$LOG_FILE"
 fi
+
+
+echo ""
+echo "========================================"
+echo "       LINUX SERVER HEALTH SUMMARY"
+echo "========================================"
+echo "Hostname:      $(hostname)"
+echo "CPU Usage:     ${CPU_USAGE}%"
+echo "Memory Usage:  ${MEMORY_USAGE}%"
+echo "Swap Usage:    ${SWAP_USAGE}%"
+echo "Disk Usage:    ${DISK_USAGE}%"
+echo "========================================"
