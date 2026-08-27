@@ -13,6 +13,18 @@ echo "---- CPU LOAD ----" >> "$LOG_FILE"
 uptime >> "$LOG_FILE"
 echo "" >> "$LOG_FILE"
 
+echo "---- CPU HEALTH CHECK ----" >> "$LOG_FILE"
+
+CPU_USAGE=$(top -bn1 | awk '/Cpu\(s\)/ {printf "%.0f", 100 - $8}')
+
+if [ "$CPU_USAGE" -ge 80 ]; then
+    echo "WARNING: CPU usage is ${CPU_USAGE}%" >> "$LOG_FILE"
+else
+    echo "OK: CPU usage is ${CPU_USAGE}%" >> "$LOG_FILE"
+fi
+
+echo "" >> "$LOG_FILE"
+
 echo "---- MEMORY USAGE ----" >> "$LOG_FILE"
 free -h >> "$LOG_FILE"
 echo "" >> "$LOG_FILE"
