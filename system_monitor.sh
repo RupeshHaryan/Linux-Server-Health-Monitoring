@@ -82,3 +82,11 @@ echo "Memory Usage:  ${MEMORY_USAGE}%"
 echo "Swap Usage:    ${SWAP_USAGE}%"
 echo "Disk Usage:    ${DISK_USAGE}%"
 echo "========================================"
+
+if [ "$CPU_USAGE" -ge 80 ] || [ "$MEMORY_USAGE" -ge 80 ] || [ "$SWAP_USAGE" -ge 50 ] || [ "$DISK_USAGE" -ge 80 ]; then
+    echo "OVERALL STATUS: WARNING"
+else
+    echo "OVERALL STATUS: SYSTEM HEALTHY"
+fi
+
+echo "========================================"
