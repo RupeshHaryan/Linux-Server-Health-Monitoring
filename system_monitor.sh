@@ -39,3 +39,22 @@ fi
 
 echo "----------------------------------------" >> "$LOG_FILE"
 echo "" >> "$LOG_FILE"
+echo "---- MEMORY HEALTH CHECK ----" >> "$LOG_FILE"
+
+MEMORY_USAGE=$(free | awk '/Mem:/ {printf "%.0f", ($3/$2)*100}')
+
+if [ "$MEMORY_USAGE" -ge 80 ]; then
+    echo "WARNING: Memory usage is ${MEMORY_USAGE}%" >> "$LOG_FILE"
+else
+    echo "OK: Memory usage is ${MEMORY_USAGE}%" >> "$LOG_FILE"
+fi
+
+echo "---- SWAP HEALTH CHECK ----" >> "$LOG_FILE"
+
+SWAP_USAGE=$(free | awk '/Swap:/ {if ($2 == 0) print 0; else printf "%.0f", ($3/$2)*100}')
+
+if [ "$SWAP_USAGE" -ge 50 ]; then
+    echo "WARNING: Swap usage is ${SWAP_USAGE}%" >> "$LOG_FILE"
+else
+    echo "OK: Swap usage is ${SWAP_USAGE}%" >> "$LOG_FILE"
+fi
